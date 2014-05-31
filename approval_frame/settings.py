@@ -104,7 +104,7 @@ except ImportError:
     from secret_key import *
 
 LOGIN_REDIRECT_URL = '/approval_polls/'
-
+LOGIN_URL = '/approval_polls/login'
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
