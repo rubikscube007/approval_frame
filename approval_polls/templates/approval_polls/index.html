@@ -4,7 +4,7 @@
 {% if latest_poll_list %}
     <ul>
     {% for poll in latest_poll_list %}
-        <li class="nowrap"><a href="{% url 'approval_polls:detail' poll.id %}">{{ poll.question }}</a></li>
+        <li class="nowrap"><a href="{% url 'approval_polls:detail' poll.id %}">{{ poll.question }}</a>-{{poll.created_by}}</li>
     {% endfor %}
     </ul>
 {% else %}
