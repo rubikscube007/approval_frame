@@ -1,9 +1,10 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 class Poll(models.Model):
 	question = models.CharField(max_length=200)
 	pub_date = models.DateTimeField('date published')
 	ballots = models.IntegerField(default=0)
+	created_by = models.ForeignKey(User)
 	def total_votes(self):
 		v = 0
 		for c in self.choice_set.all():

@@ -62,7 +62,7 @@ def created(request):
     if (q == ''):
         #TODO: Tsk, tsk; return some html!
 	return HttpResponse('You have to ask a question!')
-    p = Poll(question=q, pub_date=timezone.now(), ballots=0)
+    p = Poll(question=q, pub_date=timezone.now(), ballots=0,created_by=request.user)
     p.save()
 
     #while choice(c) exists and is not blank, add as a choice
