@@ -155,9 +155,8 @@ class PollVoteTests(TestCase):
 class PollCreateTests(TestCase):
     def setUp(self):
         self.client = Client()
-	user = User.objects.create_user('test','test@example.com','test')
-	user.save()
-	self.client.login(username='test', password='test')
+        self.user = User.objects.create_user('test','test@example.com','test')
+        self.client.login(username='test', password='test')
 
     def test_create_page_exists(self):
 	"""
@@ -171,12 +170,14 @@ class PollCreateTests(TestCase):
         Creating a new poll leads to the new polls vote page.
         """
         poll_data = {
+            'created_by':self.user,
             'question':'Create poll.',
             'choice1' :'Choice 1.',
             'choice2' :'Choice 2.',
             }        
         response = self.client.post('/approval_polls/created/', poll_data, follow=True)
         self.assertContains(response, 'Create poll.', status_code=200)
+        self.assertContains(response,self.user)
         self.assertContains(response, 'Choice 1.')
         self.assertContains(response, 'Choice 2.')
         self.assertContains(response, 'See Results')
